@@ -1,62 +1,76 @@
-# TypeScript Next.js example
+# 🌬 Zephyr
 
-This is a really simple project that shows the usage of Next.js with TypeScript.
+_Light Zephryos blows the sweetest breeze._
 
-## Deploy your own
+_&mdash; <cite>The Anacreontea, Fragment 41 (trans. Campbell, Vol. Greek Lyric II) (Greek lyric C5th B.C.)</cite>_
 
-Deploy the example using [ZEIT Now](https://zeit.co/now):
+## Project goals
 
-[![Deploy with ZEIT Now](https://zeit.co/button)](https://zeit.co/new/project?template=https://github.com/zeit/next.js/tree/canary/examples/with-typescript)
+Based on weather conditions, help a drone photography pilot answer the following questions:
 
-## How to use it?
+- Can I fly at X location today?
+- What about the next 7 days?
+- How does Y location compare, better or worse?
+- Which date/site combinations are best so I can plan my week?
 
-### Using `create-next-app`
+Typically, the best conditions are:
 
-Execute [`create-next-app`](https://github.com/zeit/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+- daylight
+- light to no wind
+- no precipitation
+- low humidity
+- moderate temperatures
+  - too cold and batteries suffer
+  - too hot and electronics overheat
 
-```bash
-npm init next-app --example with-typescript with-typescript-app
-# or
-yarn create next-app --example with-typescript with-typescript-app
-```
+## Roadmap
 
-### Download manually
+### Core
 
-Download the example:
+- [ ] get forecast for a given location (today)
+  - [ ] sunrise / sunset time
+  - [ ] wind speed (average during daylight)
+  - [ ] temperature / humidity (average during daylight)
+  - [ ] precipitation (average during daylight)
+  - [ ] invent some kind of at-a-glance aggregate indicator
+- [ ] get multi-day forecast for a given location / date
+- [ ] show simple map of location
 
-```bash
-curl https://codeload.github.com/zeit/next.js/tar.gz/canary | tar -xz --strip=2 next.js-canary/examples/with-typescript
-cd with-typescript
-```
+### Stretch
 
-Install it and run:
+- [ ] allow multiple locations
+- [ ] more in-depth data visualization
 
-```bash
-npm install
-npm run dev
-# or
-yarn
-yarn dev
-```
+  - [ ] sunrise / sunset time
+  - [ ] wind speed over time
+  - [ ] temperature / humidity over time
 
-Deploy it to the cloud with [ZEIT Now](https://zeit.co/new?filter=next.js&utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+- [ ] user authentication
+- [ ] save multiple locations to user account
 
-## Notes
+## Stack
 
-This example shows how to integrate the TypeScript type system into Next.js. Since TypeScript is supported out of the box with Next.js, all we have to do is to install TypeScript.
+| Tool                  | Purpose                      |
+| --------------------- | ---------------------------- |
+| React / Typescript    | component-driven development |
+| Next.js               | routing, SSR                 |
+| SWR                   | state management & data flow |
+| Sunrise Sunset        | sunrise/sunset times API     |
+| DarkSky / OpenWeather | weather API                  |
+| Mapbox                | mapping / geocoding API      |
+| Now                   | deployment                   |
 
-```
-npm install --save-dev typescript
-```
-
-To enable TypeScript's features, we install the type declaratons for React and Node.
-
-```
-npm install --save-dev @types/react @types/react-dom @types/node
-```
-
-When we run `next dev` the next time, Next.js will start looking for any `.ts` or `.tsx` files in our project and builds it. It even automatically creates a `tsconfig.json` file for our project with the recommended settings.
-
-Next.js has built-in TypeScript declarations, so we'll get autocompletion for Next.js' modules straight away.
-
-A `type-check` script is also added to `package.json`, which runs TypeScript's `tsc` CLI in `noEmit` mode to run type-checking separately. You can then include this, for example, in your `test` scripts.
+<!-- When looking for a code sample, we would like to see a webapp that:
+1. Has strong modern web development fundamentals like:
+    1. Component-driven development,
+    2. State management & data flow, and
+    3. Language fundamentals & effective patterns;
+2. Includes CRUD interaction with data like:
+    1. Accessing remote APIs,
+    2. Consuming dynamic data, and
+    3. Error handling; and
+3. Presents well to both users and other developers with:
+    1. Components that show dynamic data,
+    2. Appropriate documentation, code legibility, code comments, etc., and
+    3. A good, usable UI.
+Note: Our preference is to have a code sample in Javascript that can be compiled and run. -->
