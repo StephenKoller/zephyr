@@ -2,6 +2,10 @@ import * as React from 'react'
 import { useState } from 'react'
 import Layout from '../components/Layout'
 import { NextPage } from 'next'
+import fetch from 'isomorphic-unfetch'
+
+const MAPBOX_URL = (searchTerm: string) =>
+  `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchTerm}.json?access_token=${process.env.MAPBOX_KEY}`
 
 type Props = {
   suntimes: {
@@ -10,12 +14,33 @@ type Props = {
   }
 }
 
+type Feature = {
+  bbox: [number]
+  center: [number, number]
+  context: [{}]
+  geometry: { type: string; coordinates: [number] }
+  id: string
+  place_name: string
+  place_type: [string]
+  properties: { wikidata: string }
+  relevance: number
+  text: 'Detroit'
+  type: 'Feature'
+}
+
+type MapboxData = {
+  features: [Feature]
+}
+
 const IndexPage: NextPage<Props> = () => {
   const [searchTerm, setSearchTerm] = useState('')
+  const [mapboxData, setMapboxData] = useState({} as MapboxData)
 
-  const handleEnterKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleEnterKey = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e?.key === 'Enter') {
-      console.log(searchTerm)
+      const res = await fetch(MAPBOX_URL(searchTerm))
+      const data = await res.json()
+      setMapboxData(data)
     }
   }
 
@@ -35,6 +60,7 @@ const IndexPage: NextPage<Props> = () => {
         <span className="icon reversed">🌬</span>
       </div>
       <br />
+      <div>{mapboxData?.features?.[0]?.center}</div>
       <style jsx>{`
         h1 {
           color: #2e5689;
