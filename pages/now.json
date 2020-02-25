@@ -1,0 +1,9 @@
+{
+  "build": {
+    "env": {
+      "MAPBOX_KEY": "@mapbox-key",
+      "NASA_KEY": "@nasa-key",
+      "DARKSKY_KEY": "@darksky-key"
+    }
+  }
+}
