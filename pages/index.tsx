@@ -9,7 +9,7 @@ const MAPBOX_URL = (searchTerm: string) =>
   `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchTerm}.json?access_token=${process.env.MAPBOX_KEY}&exclude=alerts`
 
 const DARKSKY_URL = (latitude: number, longitude: number) =>
-  `https://proxier-koller.now.sh/https://api.darksky.net/forecast/${process.env.DARKSKY_KEY}/${latitude},${longitude}`
+  `https://proxier.now.sh/https://api.darksky.net/forecast/${process.env.DARKSKY_KEY}/${latitude},${longitude}`
 
 type Props = {
   suntimes: {
@@ -28,7 +28,7 @@ const IndexPage: NextPage<Props> = () => {
 
     const fetchWeather = async () => {
       const [latitude, longitude] = mapboxData?.features?.[0]?.center
-      const res = await fetch(DARKSKY_URL(latitude, longitude), { headers: { 'Access-Control-Allow-Origin': '*' } })
+      const res = await fetch(DARKSKY_URL(latitude, longitude), { mode: 'no-cors' })
       const data: Forecast = await res.json()
       console.log(data)
       setForecast(data)
