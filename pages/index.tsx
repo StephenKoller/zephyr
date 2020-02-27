@@ -1,11 +1,15 @@
 import * as React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Layout from '../components/Layout'
 import { NextPage } from 'next'
 import fetch from 'isomorphic-unfetch'
+import { MapboxData, Forecast } from '../types'
 
 const MAPBOX_URL = (searchTerm: string) =>
-  `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchTerm}.json?access_token=${process.env.MAPBOX_KEY}`
+  `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchTerm}.json?access_token=${process.env.MAPBOX_KEY}&exclude=alerts`
+
+const DARKSKY_URL = (latitude: number, longitude: number) =>
+  `https://api.darksky.net/forecast/${process.env.DARKSKY_KEY}/${latitude},${longitude}`
 
 type Props = {
   suntimes: {
@@ -14,27 +18,24 @@ type Props = {
   }
 }
 
-type Feature = {
-  bbox: [number]
-  center: [number, number]
-  context: [{}]
-  geometry: { type: string; coordinates: [number] }
-  id: string
-  place_name: string
-  place_type: [string]
-  properties: { wikidata: string }
-  relevance: number
-  text: 'Detroit'
-  type: 'Feature'
-}
-
-type MapboxData = {
-  features: [Feature]
-}
-
 const IndexPage: NextPage<Props> = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [mapboxData, setMapboxData] = useState({} as MapboxData)
+  const [forecast, setForecast] = useState({} as Forecast)
+
+  useEffect(() => {
+    if (!mapboxData?.features?.[0]?.center) return
+
+    const fetchWeather = async () => {
+      const [latitude, longitude] = mapboxData?.features?.[0]?.center
+      const res = await fetch(DARKSKY_URL(latitude, longitude))
+      const data: Forecast = await res.json()
+      console.log(data)
+      setForecast(data)
+    }
+
+    fetchWeather()
+  }, [mapboxData])
 
   const handleEnterKey = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e?.key === 'Enter') {
@@ -61,6 +62,7 @@ const IndexPage: NextPage<Props> = () => {
       </div>
       <br />
       <div>{mapboxData?.features?.[0]?.center}</div>
+      <div>{forecast?.currently?.windSpeed}</div>
       <style jsx>{`
         h1 {
           color: #2e5689;
