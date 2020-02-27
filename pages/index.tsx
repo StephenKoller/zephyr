@@ -9,7 +9,7 @@ const MAPBOX_URL = (searchTerm: string) =>
   `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchTerm}.json?access_token=${process.env.MAPBOX_KEY}&exclude=alerts`
 
 const DARKSKY_URL = (latitude: number, longitude: number) =>
-  `https://api.darksky.net/forecast/${process.env.DARKSKY_KEY}/${latitude},${longitude}`
+  `https://proxier-koller.now.sh/https://api.darksky.net/forecast/${process.env.DARKSKY_KEY}/${latitude},${longitude}`
 
 type Props = {
   suntimes: {
