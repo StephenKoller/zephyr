@@ -15,17 +15,16 @@ const Layout: React.FunctionComponent<Props> = ({ children, title = '🌬 Zephyr
       <link href="https://fonts.googleapis.com/css?family=Caesar+Dressing&display=swap" rel="stylesheet" />
     </Head>
     <header></header>
-    {children}
+    <main>{children}</main>
     <footer>
       <hr />
       <nav>
         <Link href="/">
           <a>Home</a>
-        </Link>{' '}
-        |{' '}
+        </Link>
         <Link href="/about">
           <a>About</a>
-        </Link>{' '}
+        </Link>
       </nav>
     </footer>
 
@@ -37,6 +36,10 @@ const Layout: React.FunctionComponent<Props> = ({ children, title = '🌬 Zephyr
         display: flex;
         justify-content: center;
         text-align: center;
+      }
+
+      main {
+        width: 320px;
       }
     `}</style>
   </div>
