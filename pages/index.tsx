@@ -20,6 +20,7 @@ const IndexPage: NextPage<Props> = () => {
   const [mapboxData, setMapboxData] = useState({} as MapboxData)
   const [forecast, setForecast] = useState({} as Forecast)
 
+  // trigger fetch of forecast data when geocoding is done
   useEffect(() => {
     if (!mapboxData?.features?.[0]?.center) return
 
@@ -38,12 +39,15 @@ const IndexPage: NextPage<Props> = () => {
     fetchWeather()
   }, [mapboxData])
 
-  const handleEnterKey = async (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e?.key === 'Enter') {
-      const res = await fetch(MAPBOX_URL(searchTerm))
-      const data = await res.json()
-      setMapboxData(data)
-    }
+  const fetchLatLong = async () => {
+    const res = await fetch(MAPBOX_URL(searchTerm))
+    const data = await res.json()
+    setMapboxData(data)
+  }
+
+  // trigger geocoding fetch of lat/long on search box submit
+  const handleEnterKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e?.key === 'Enter') fetchLatLong()
   }
 
   return (
@@ -61,8 +65,9 @@ const IndexPage: NextPage<Props> = () => {
         />
         <span className="icon reversed">🌬</span>
       </div>
+      <button onClick={() => fetchLatLong()}>Search</button>
       <br />
-      <div>{mapboxData?.features?.[0]?.center}</div>
+
       <div>{forecast?.currently?.windSpeed}</div>
       <style jsx>{`
         h1 {
