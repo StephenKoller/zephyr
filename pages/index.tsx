@@ -25,7 +25,11 @@ const IndexPage: NextPage<Props> = () => {
 
     const fetchWeather = async () => {
       const [latitude, longitude] = mapboxData?.features?.[0]?.center
-      const res = await fetch(DARKSKY_URL(latitude, longitude), { mode: 'no-cors' })
+      const res = await fetch(DARKSKY_URL(latitude, longitude), {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
       const data: Forecast = await res.json()
       console.log(data)
       setForecast(data)
