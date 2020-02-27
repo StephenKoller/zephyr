@@ -50,15 +50,16 @@ Typically, the best conditions are:
 
 ## Stack
 
-| Tool                  | Purpose                      |
-| --------------------- | ---------------------------- |
-| React / Typescript    | component-driven development |
-| Next.js               | routing, SSR                 |
-| SWR                   | state management & data flow |
-| Sunrise Sunset        | sunrise/sunset times API     |
-| DarkSky / OpenWeather | weather API                  |
-| Mapbox                | mapping / geocoding API      |
-| Now                   | deployment                   |
+| Tool                                                                            | Purpose                                        |
+| ------------------------------------------------------------------------------- | ---------------------------------------------- |
+| [React](https://reactjs.org/) and [TypeScript](https://www.typescriptlang.org/) | component-driven development with static types |
+| [Next.js](https://nextjs.org/)                                                  | routing, SSR                                   |
+| <!--                                                                            | SWR                                            | state management & data flow | --> |
+| [Sunrise Sunset](https://sunrise-sunset.org/api)                                | sunrise/sunset times                           |
+| [darksky-api](https://github.com/worldturtlemedia/darksky-api)                  | TypeScript type defs for API response          |
+| [DarkSky API](https://darksky.net/dev/docs)                                     | weather data                                   |
+| [Mapbox API](https://docs.mapbox.com/api/)                                      | mapping / geocoding data                       |
+| [Now](https://zeit.co/now)                                                      | deployment                                     |
 
 <!-- When looking for a code sample, we would like to see a webapp that:
 1. Has strong modern web development fundamentals like:
