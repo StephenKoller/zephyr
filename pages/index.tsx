@@ -77,21 +77,22 @@ const IndexPage: NextPage<Props> = () => {
           border: 1px solid rgb(216, 216, 216);
           display: inline-flex;
           font-size: 0.875rem;
-          height: 2.5rem;
+          height: 2.25rem;
           outline: currentcolor none 0px;
           padding: 0;
           transition: border 0.2s ease 0s;
-          width: 100%;
+          width: calc(100% - 2px);
+          background-color: #fff;
         }
 
         #location-search > input {
           font-size: 1rem;
           display: flex;
-          width: calc(100% - 2rem);
           height: 100%;
+          width: 100%;
           border: medium none;
           outline: currentcolor none 0px;
-          padding: 0 1rem 0 1rem;
+          padding: 0 0.5rem 0 0.5rem;
           text-align: center;
         }
 
