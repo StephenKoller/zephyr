@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { useState, useEffect } from 'react'
 import { NextPage } from 'next'
-import fetch from 'isomorphic-unfetch'
 
 import { MapboxData, Forecast } from '../types'
 import Layout from '../components/Layout'
 
-import { MAPBOX_URL, DARKSKY_URL } from './utils'
+import { fetchWeather, fetchLatLong } from '../utils/api'
+import Table from '../components/Table'
 
 type Props = {
   suntimes: {
@@ -22,32 +22,23 @@ const IndexPage: NextPage<Props> = () => {
 
   // trigger fetch of forecast data when geocoding is done
   useEffect(() => {
+    // bail out if we don't have the lat / long yet
     if (!mapboxData?.features?.[0]?.center) return
 
-    const fetchWeather = async () => {
+    // need to create and call an async/await function within useEffect
+    // rather than try to pass an async function to useEffect directly
+    const getWeatherData = async () => {
       const [latitude, longitude] = mapboxData?.features?.[0]?.center
-      const res = await fetch(DARKSKY_URL(latitude, longitude), {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      const data: Forecast = await res.json()
-      console.log(data)
-      setForecast(data)
+      const weatherData = await fetchWeather(latitude, longitude)
+      setForecast(weatherData)
     }
 
-    fetchWeather()
+    getWeatherData()
   }, [mapboxData])
 
-  const fetchLatLong = async () => {
-    const res = await fetch(MAPBOX_URL(searchTerm))
-    const data = await res.json()
-    setMapboxData(data)
-  }
-
   // trigger geocoding fetch of lat/long on search box submit
-  const handleEnterKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e?.key === 'Enter') fetchLatLong()
+  const handleEnterKey = async (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e?.key === 'Enter') setMapboxData(await fetchLatLong(searchTerm))
   }
 
   return (
@@ -65,9 +56,14 @@ const IndexPage: NextPage<Props> = () => {
         />
         <span className="icon reversed">🌬</span>
       </div>
-      <button onClick={() => fetchLatLong()}>Search</button>
+      <br />
+      <button id="search-button" onClick={async () => await fetchLatLong(searchTerm)}>
+        Search
+      </button>
       <br />
 
+      <h2>{mapboxData?.features?.[0]?.place_name}</h2>
+      <h2>{forecast?.hourly?.summary}</h2>
 
       <Table forecast={forecast} />
       <style jsx>{`
@@ -90,7 +86,7 @@ const IndexPage: NextPage<Props> = () => {
           outline: currentcolor none 0px;
           padding: 0;
           transition: border 0.2s ease 0s;
-          width: calc(100% - 2px);
+          width: 320px;
           background-color: #fff;
         }
 
@@ -103,6 +99,13 @@ const IndexPage: NextPage<Props> = () => {
           outline: currentcolor none 0px;
           padding: 0 0.5rem 0 0.5rem;
           text-align: center;
+        }
+
+        #search-button {
+          padding: 0.3em 1em;
+          font-size: 1em;
+          border-radius: 4px;
+          margin: 0.5em;
         }
 
         .icon {
