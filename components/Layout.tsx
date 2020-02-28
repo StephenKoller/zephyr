@@ -29,17 +29,17 @@ const Layout: React.FunctionComponent<Props> = ({ children, title = '🌬 Zephyr
     </footer>
 
     <style jsx global>{`
-      body {
+      html {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        font-family: Tahoma, Arial, sans-serif;
+      }
+
+      body {
         display: flex;
         justify-content: center;
         text-align: center;
-      }
-
-      main {
-        width: 320px;
       }
     `}</style>
   </div>
