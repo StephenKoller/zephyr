@@ -9,7 +9,7 @@ const formatPercentage = (num: number) => (num * 100).toFixed(0)
 
 const formatTime = (time: number) => {
   const t = new Date(time * 1000)
-  return t.toUTCString()
+  return t.toLocaleString()
 }
 
 const formatTemperature = (temp: number) => ((temp * 9) / 5 + 32).toFixed(0)
