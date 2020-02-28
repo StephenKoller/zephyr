@@ -68,7 +68,8 @@ const IndexPage: NextPage<Props> = () => {
       <button onClick={() => fetchLatLong()}>Search</button>
       <br />
 
-      <div>{forecast?.currently?.windSpeed}</div>
+
+      <Table forecast={forecast} />
       <style jsx>{`
         h1 {
           color: #2e5689;
