@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-unfetch'
-import { Forecast } from "../types"
+import { Forecast, MapboxData } from "../types"
 
 export const MAPBOX_URL = (searchTerm: string) =>
   `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchTerm}.json?access_token=${process.env.MAPBOX_KEY}&exclude=alerts`
@@ -18,7 +18,7 @@ export const fetchWeather = async (latitude: number, longitude: number): Promise
   return data
 }
 
-export const fetchLatLong = async (searchTerm: string) => {
+export const fetchLocationData = async (searchTerm: string): Promise<MapboxData> => {
   const res = await fetch(MAPBOX_URL(searchTerm))
   const data = await res.json()
   console.log(data)

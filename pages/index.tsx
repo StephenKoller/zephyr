@@ -5,7 +5,7 @@ import { NextPage } from 'next'
 import { MapboxData, Forecast } from '../types'
 import Layout from '../components/Layout'
 
-import { fetchWeather, fetchLatLong } from '../utils/api'
+import { fetchWeather, fetchLocationData } from '../utils/api'
 import Table from '../components/Table'
 
 import indexStyles from './index.styles.js'
@@ -57,8 +57,8 @@ const IndexPage: NextPage<Props> = () => {
 
   const fetchWeatherOrShowErrors = async () => {
     try {
-      const latLong = await fetchLatLong(searchTerm)
-      setMapboxData(latLong)
+      const locationData = await fetchLocationData(searchTerm)
+      setMapboxData(locationData)
       // clear error message if successful
       setError('')
     } catch (error) {
