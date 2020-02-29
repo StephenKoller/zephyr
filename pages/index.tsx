@@ -27,7 +27,14 @@ const IndexPage: NextPage<Props> = () => {
   // reset error state when user types in the search bar
   useEffect(() => {
     if (error) setError('')
+    if (searchTerm === '') resetData()
   }, [searchTerm])
+
+  const resetData = () => {
+    setSuntimes({} as SunriseSunsetTimes)
+    setForecast({} as Forecast)
+    setMapboxData({} as MapboxData)
+  }
 
   // trigger fetch of sunrise, forecast data when geocoding is done
   useEffect(() => {
@@ -50,6 +57,7 @@ const IndexPage: NextPage<Props> = () => {
         setError('')
       } catch (error) {
         setError(error.message)
+        resetData()
       }
     }
 
@@ -60,6 +68,7 @@ const IndexPage: NextPage<Props> = () => {
         setError('')
       } catch (error) {
         setError(error.message)
+        resetData()
       }
     }
 
@@ -74,6 +83,7 @@ const IndexPage: NextPage<Props> = () => {
       setError('')
     } catch (error) {
       setError(error.message)
+      resetData()
     }
   }
 
@@ -116,7 +126,7 @@ const IndexPage: NextPage<Props> = () => {
       {suntimes?.results?.sunrise && <h3>Sunrise: {suntimes?.results?.sunrise}</h3>}
       {suntimes?.results?.sunset && <h3>Sunset: {suntimes?.results?.sunset}</h3>}
 
-      <Table forecast={forecast} />
+      {Object.keys(forecast).length > 0 && <Table forecast={forecast} />}
 
       <style jsx>{indexStyles}</style>
       <style jsx>{`
