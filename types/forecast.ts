@@ -110,3 +110,8 @@ export interface ResponseHeaders {
 
   [key: string]: any
 }
+
+export interface ForecastError {
+  code: number;
+  error: string;
+}
