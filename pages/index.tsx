@@ -22,6 +22,7 @@ const IndexPage: NextPage<Props> = () => {
   const [mapboxData, setMapboxData] = useState({} as MapboxData)
   const [forecast, setForecast] = useState({} as Forecast)
   const [suntimes, setSuntimes] = useState({} as SunriseSunsetTimes)
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
   // reset error state when user types in the search bar
@@ -34,12 +35,14 @@ const IndexPage: NextPage<Props> = () => {
     setSuntimes({} as SunriseSunsetTimes)
     setForecast({} as Forecast)
     setMapboxData({} as MapboxData)
+    setLoading(false)
   }
 
   // trigger fetch of sunrise, forecast data when geocoding is done
   useEffect(() => {
     if (mapboxData?.features?.length === 0) {
       setError('Could not find a result for that search term.')
+      resetData()
       return
     }
 
@@ -72,11 +75,15 @@ const IndexPage: NextPage<Props> = () => {
       }
     }
 
+    // TODO: Investigate using Promise.all to wait until all have resolved before displaying data.
+    // Bonus: could possibly reduce duplication, allow me to use just a single try/catch for error handling
     getWeatherData()
     getSuntimes()
+    setLoading(false)
   }, [mapboxData])
 
   const fetchWeatherOrShowErrors = async () => {
+    setLoading(true)
     try {
       const locationData = await fetchLocationData(searchTerm)
       setMapboxData(locationData)
@@ -116,7 +123,8 @@ const IndexPage: NextPage<Props> = () => {
       <br />
       {/* </searchbar> */}
 
-      <div>{error}</div>
+      {error && <div>{error}</div>}
+      {loading && <div>Loading...</div>}
 
       <h2>{mapboxData?.features?.[0]?.place_name}</h2>
 
