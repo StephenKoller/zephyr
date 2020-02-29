@@ -5,16 +5,6 @@ interface Props {
   forecast: Forecast
 }
 
-// format metric to imperial
-// TODO: move data transformation to API layer
-const formatPercentage = (num: number) => (num * 100).toFixed(0)
-const formatTime = (time: number) => {
-  const t = new Date(time * 1000)
-  return t.toLocaleString()
-}
-const formatTemperature = (temp: number) => ((temp * 9) / 5 + 32).toFixed(0)
-const formatSpeed = (speed: number) => (speed * 2.237).toFixed(0)
-
 const Table: FC<Props> = ({ forecast }) => (
   <>
     <table>
@@ -32,13 +22,13 @@ const Table: FC<Props> = ({ forecast }) => (
       <tbody>
         {forecast.hourly?.data?.map((hour: HourlyDataPoint) => (
           <tr key={hour.time}>
-            <td>{formatTime(hour.time)}</td>
+            <td>{hour.formattedTime}</td>
             <td>{hour.summary}</td>
-            <td>{formatPercentage(hour.precipProbability)}%</td>
-            <td>{formatTemperature(hour.temperature)}º F</td>
-            <td>{formatPercentage(hour.humidity)}%</td>
-            <td>{formatSpeed(hour.windSpeed)} MPH</td>
-            <td>{formatSpeed(hour.windGust)} MPH</td>
+            <td>{hour.precipProbability}%</td>
+            <td>{hour.temperature}º F</td>
+            <td>{hour.humidity}%</td>
+            <td>{hour.windSpeed} MPH</td>
+            <td>{hour.windGust} MPH</td>
           </tr>
         ))}
       </tbody>

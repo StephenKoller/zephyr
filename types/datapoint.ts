@@ -41,6 +41,8 @@ export interface DataPoint {
    */
   time: number
 
+  formattedTime?: string
+
   /**
    * The apparent (or “feels like”) temperature in degrees Fahrenheit.
    *
