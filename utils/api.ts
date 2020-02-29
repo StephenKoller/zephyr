@@ -1,11 +1,14 @@
 import fetch from 'isomorphic-unfetch'
-import { Forecast, MapboxData, ForecastError, HourlyDataBlock } from "../types"
+import { Forecast, ForecastError, HourlyDataBlock, MapboxData, SunriseSunsetTimes } from "../types"
 
 export const MAPBOX_URL = (searchTerm: string) =>
   `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchTerm}.json?access_token=${process.env.MAPBOX_KEY}&exclude=alerts`
 
 export const DARKSKY_URL = (latitude: number, longitude: number) =>
   `https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${process.env.DARKSKY_KEY}/${latitude},${longitude}`
+
+export const SUNTIMES_URL = (latitude: number, longitude: number) => 
+  `https://api.sunrise-sunset.org/json?lat=${latitude}&lng=${longitude}&date=today`
 
 // format metric to imperial units
 const formatForecast = (forecast: Forecast): Forecast => {
@@ -49,6 +52,18 @@ export const fetchWeather = async (latitude: number, longitude: number): Promise
 export const fetchLocationData = async (searchTerm: string): Promise<MapboxData> => {
   const res = await fetch(MAPBOX_URL(searchTerm))
   const data = await res.json()
+  console.log(data)
+  return data
+}
+
+export const fetchSunriseSunsetTimes = async (latitude: number, longitude: number): Promise<SunriseSunsetTimes> => {
+  const res = await fetch(SUNTIMES_URL(latitude, longitude))
+  const data: SunriseSunsetTimes = await res.json()
+
+  if (data.status !== "OK") {
+    throw new Error("Could not fetch sunrise / sunset times.")
+  }
+
   console.log(data)
   return data
 }
