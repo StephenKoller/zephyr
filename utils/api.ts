@@ -7,9 +7,7 @@ export const MAPBOX_URL = (searchTerm: string) =>
 export const DARKSKY_URL = (latitude: number, longitude: number) =>
   `https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${process.env.DARKSKY_KEY}/${latitude},${longitude}`
 
-export const fetchWeather = async (latitude: number, longitude: number) => {
-  console.log('fetching weather data...')
-
+export const fetchWeather = async (latitude: number, longitude: number): Promise<Forecast> => {
   const res = await fetch(DARKSKY_URL(latitude, longitude), {
     headers: {
       'Content-Type': 'application/json',
@@ -21,8 +19,6 @@ export const fetchWeather = async (latitude: number, longitude: number) => {
 }
 
 export const fetchLatLong = async (searchTerm: string) => {
-  console.log('fetching geocoding data...')
-
   const res = await fetch(MAPBOX_URL(searchTerm))
   const data = await res.json()
   console.log(data)
