@@ -41,7 +41,7 @@ const IndexPage: NextPage<Props> = () => {
 
     // need to create and call async/await functions within useEffect
     // rather than try to pass an async callback to useEffect directly
-    const [latitude, longitude] = mapboxData.features[0].center
+    const [longitude, latitude] = mapboxData.features[0].center
 
     const getWeatherData = async () => {
       try {

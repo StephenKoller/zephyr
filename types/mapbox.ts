@@ -1,3 +1,4 @@
+// important note: 'center' tuple is [longitude, latitude], NOT [latitude, longitude]!
 export type MapboxFeature = {
   bbox: number[]
   center: [number, number]

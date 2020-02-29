@@ -21,7 +21,7 @@ const formatForecast = (forecast: Forecast): Forecast => {
       formattedTime: (new Date(hourlyDataPoint.time * 1000)).toLocaleString(),
       precipProbability: parseInt((hourlyDataPoint.precipProbability * 100).toFixed(0)),
       humidity: parseInt((hourlyDataPoint.humidity * 100).toFixed(0)),
-      temperature: parseInt(((hourlyDataPoint.temperature * 9) / 5 + 32).toFixed(0)),
+      temperature: parseInt(hourlyDataPoint.temperature.toFixed(0)),
       windSpeed: parseInt((hourlyDataPoint.windSpeed * 2.237).toFixed(0)),
       windGust: parseInt((hourlyDataPoint.windGust * 2.237).toFixed(0)),
     }))
