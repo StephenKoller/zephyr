@@ -111,8 +111,8 @@ const IndexPage: NextPage<Props> = () => {
       <h2>{mapboxData?.features?.[0]?.place_name}</h2>
       <h3>{forecast?.hourly?.summary}</h3>
       <h3>{forecast?.daily?.summary}</h3>
-      <h3>Sunrise: {suntimes?.results?.sunrise}</h3>
-      <h3>Sunset: {suntimes?.results?.sunset}</h3>
+      {suntimes?.results?.sunrise && <h3>Sunrise: {suntimes?.results?.sunrise}</h3>}
+      {suntimes?.results?.sunset && <h3>Sunset: {suntimes?.results?.sunset}</h3>}
 
       <Table forecast={forecast} />
 

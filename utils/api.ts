@@ -8,7 +8,7 @@ export const DARKSKY_URL = (latitude: number, longitude: number) =>
   `https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${process.env.DARKSKY_KEY}/${latitude},${longitude}`
 
 export const SUNTIMES_URL = (latitude: number, longitude: number) => 
-  `https://api.sunrise-sunset.org/json?lat=${latitude}&lng=${longitude}&date=today`
+  `https://api.sunrise-sunset.org/json?lat=${latitude}&lng=${longitude}&date=today&formatted=0`
 
 // format metric to imperial units
 const formatForecast = (forecast: Forecast): Forecast => {
@@ -64,6 +64,14 @@ export const fetchSunriseSunsetTimes = async (latitude: number, longitude: numbe
     throw new Error("Could not fetch sunrise / sunset times.")
   }
 
-  console.log(data)
-  return data
+  const formattedResults = {
+    ...data.results,
+    sunrise: new Date(data.results.sunrise).toLocaleTimeString(),
+    sunset: new Date(data.results.sunset).toLocaleTimeString(),
+  }
+
+  const formattedData = {...data, results: formattedResults}
+
+  console.log(formattedData)
+  return formattedData
 }
