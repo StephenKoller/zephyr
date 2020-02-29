@@ -1,11 +1,11 @@
 export type MapboxFeature = {
-  bbox: [number]
+  bbox: number[]
   center: [number, number]
   context: [{}]
-  geometry: { type: string; coordinates: [number] }
+  geometry: { type: string; coordinates: number[] }
   id: string
   place_name: string
-  place_type: [string]
+  place_type: string[]
   properties: { wikidata: string }
   relevance: number
   text: string
@@ -13,5 +13,5 @@ export type MapboxFeature = {
 }
 
 export type MapboxData = {
-  features: [MapboxFeature]
+  features: MapboxFeature[]
 }
