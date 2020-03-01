@@ -6,9 +6,12 @@ _&mdash; <cite>The Anacreontea, Fragment 41 (trans. Campbell, Vol. Greek Lyric I
 
 ## Project goals
 
-Based on weather conditions, help a drone photography pilot answer the following questions:
+Based on weather conditions, help a drone photography pilot answer the following question(s):
 
 - Can I fly at X location today?
+
+(Stretch Goals)
+
 - What about the next 7 days?
 - How does Y location compare, better or worse?
 - Which date/site combinations are best so I can plan my week?
