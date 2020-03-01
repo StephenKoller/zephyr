@@ -96,6 +96,9 @@ const IndexPage: NextPage<Props> = () => {
   }
   const handleClickSearch = async () => fetchWeatherOrShowErrors()
 
+  // bit of a hack: {} aka empty object will have an Object.keys.length of 0
+  const hasForecastData = Object.keys(forecast).length > 0
+
   return (
     <Layout>
       <h1>Zephyr</h1>
@@ -123,7 +126,7 @@ const IndexPage: NextPage<Props> = () => {
       {suntimes?.results?.sunrise && <h3>Sunrise: {suntimes?.results?.sunrise}</h3>}
       {suntimes?.results?.sunset && <h3>Sunset: {suntimes?.results?.sunset}</h3>}
 
-      {Object.keys(forecast).length > 0 && <Table forecast={forecast} />}
+      {hasForecastData && <Table forecast={forecast} />}
 
       <style jsx>{indexStyles}</style>
       <style jsx>{`
