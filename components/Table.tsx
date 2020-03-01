@@ -6,61 +6,32 @@ interface Props {
 }
 
 const Table: FC<Props> = ({ forecast }) => (
-  <>
-    <table>
-      <thead>
-        <tr>
-          <th>Time</th>
-          <th>Summary</th>
-          <th>Chance of Precipitation</th>
-          <th>Temperature</th>
-          <th>Humidity</th>
-          <th>Wind Speed</th>
-          <th>Wind Gusts</th>
+  <table className="table table-striped">
+    <thead>
+      <tr>
+        <th>Time</th>
+        <th>Summary</th>
+        <th>Chance of Precipitation</th>
+        <th>Temperature</th>
+        <th>Humidity</th>
+        <th>Wind Speed</th>
+        <th>Wind Gusts</th>
+      </tr>
+    </thead>
+    <tbody>
+      {forecast.hourly?.data?.map((hour: HourlyDataPoint) => (
+        <tr key={hour.time}>
+          <td>{hour.formattedTime}</td>
+          <td>{hour.summary}</td>
+          <td>{hour.precipProbability}%</td>
+          <td>{hour.temperature}º F</td>
+          <td>{hour.humidity}%</td>
+          <td>{hour.windSpeed} MPH</td>
+          <td>{hour.windGust} MPH</td>
         </tr>
-      </thead>
-      <tbody>
-        {forecast.hourly?.data?.map((hour: HourlyDataPoint) => (
-          <tr key={hour.time}>
-            <td>{hour.formattedTime}</td>
-            <td>{hour.summary}</td>
-            <td>{hour.precipProbability}%</td>
-            <td>{hour.temperature}º F</td>
-            <td>{hour.humidity}%</td>
-            <td>{hour.windSpeed} MPH</td>
-            <td>{hour.windGust} MPH</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-    <style jsx>{`
-      table {
-        border-spacing: 0;
-      }
-
-      tr {
-        background-color: #eee;
-      }
-
-      tr:nth-of-type(2n) {
-        background-color: #ddd;
-      }
-
-      tr :last-child td {
-        border-bottom: 0;
-      }
-
-      th,
-      td {
-        margin: 0;
-        padding: 0.5rem;
-      }
-
-      td:last-child {
-        border-right: 0;
-      }
-    `}</style>
-  </>
+      ))}
+    </tbody>
+  </table>
 )
 
 export default Table

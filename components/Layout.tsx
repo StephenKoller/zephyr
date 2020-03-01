@@ -1,5 +1,4 @@
 import * as React from 'react'
-import Link from 'next/link'
 import Head from 'next/head'
 
 type Props = {
@@ -11,20 +10,15 @@ const Layout: React.FunctionComponent<Props> = ({ children, title = '🌬 Zephyr
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />
+      <meta name="description" content="weather forecast for drone pilots" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      <link href="https://fonts.googleapis.com/css?family=Caesar+Dressing&display=swap" rel="stylesheet" />
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Caesar+Dressing&display=swap" />
+      <link rel="stylesheet" href="//unpkg.com/spectre.css/dist/spectre.min.css" />
     </Head>
     <header></header>
     <main>{children}</main>
 
     <style jsx global>{`
-      html {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: Tahoma, Arial, sans-serif;
-      }
-
       body {
         display: flex;
         justify-content: center;
