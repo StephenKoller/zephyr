@@ -17,17 +17,30 @@ const getWindClassName = (windSpeed: number) => {
   return 'bg-success'
 }
 
+const getPrecipitationClassName = (precipitation: number) => {
+  if (precipitation > 60) return 'bg-error'
+  if (precipitation > 40) return 'bg-warning'
+  return 'bg-success'
+}
+
+const canFly = (hour: HourlyDataPoint) => {
+  const precipOk = hour.precipProbability < 60
+  const windOk = hour.windSpeed < 15 && hour.windGust < 30
+  const temperatureOk = hour.temperature > 59 && hour.temperature < 90
+  return precipOk && windOk && temperatureOk
+}
+
 const Table: FC<Props> = ({ forecast }) => (
   <>
     <table className="table table-striped">
       <thead>
         <tr style={{ backgroundColor: 'none' }}>
           <th>Time</th>
+          <th>Summary</th>
+          <th>Can I fly?</th>
           <th>Wind Speed</th>
           <th>Wind Gusts</th>
-          <th>Summary</th>
           <th>Temperature</th>
-          <th>Humidity</th>
           <th>Precipitation</th>
         </tr>
       </thead>
@@ -35,12 +48,12 @@ const Table: FC<Props> = ({ forecast }) => (
         {forecast.hourly?.data?.map((hour: HourlyDataPoint) => (
           <tr key={hour.time}>
             <td>{hour.formattedTime}</td>
+            <td>{hour.summary}</td>
+            <td className={canFly(hour) ? 'bg-success' : 'bg-error'}>{canFly(hour) ? 'Yes' : 'No'}</td>
             <td className={getWindClassName(hour.windSpeed)}>{hour.windSpeed} MPH</td>
             <td className={getWindClassName(hour.windGust)}>{hour.windGust} MPH</td>
-            <td>{hour.summary}</td>
             <td className={getTemperatureClassName(hour.temperature)}>{hour.temperature}º F</td>
-            <td>{hour.humidity}%</td>
-            <td>{hour.precipProbability}%</td>
+            <td className={getPrecipitationClassName(hour.precipProbability)}>{hour.precipProbability}%</td>
           </tr>
         ))}
       </tbody>
