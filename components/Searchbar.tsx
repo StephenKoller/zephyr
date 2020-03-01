@@ -24,6 +24,9 @@ const Searchbar: FC<Props> = ({ searchTerm, handleEnterKey, setSearchTerm, setEr
   return (
     <div id="location-search">
       <span className="icon">🌬</span>
+      <label htmlFor="location-search" aria-hidden="false" style={{ display: 'none' }}>
+        Location Search
+      </label>
       <input
         type="text"
         placeholder="Search for a location..."
