@@ -4,19 +4,16 @@ interface Props {
   searchTerm: string
   setSearchTerm: Dispatch<SetStateAction<string>>
   setError: Dispatch<SetStateAction<string>>
-  setSearchEnabled: Dispatch<SetStateAction<boolean>>
   handleEnterKey: (e: KeyboardEvent<HTMLInputElement>) => void
 }
 
-const Searchbar: FC<Props> = ({ searchTerm, handleEnterKey, setSearchTerm, setError, setSearchEnabled }) => {
+const Searchbar: FC<Props> = ({ searchTerm, handleEnterKey, setSearchTerm, setError }) => {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value)
     if (e.target.checkValidity()) {
       setError('')
-      setSearchEnabled(true)
     } else {
       setError('Invalid search term: please use only letters in the search bar.')
-      setSearchEnabled(false)
     }
     return e.target.value
   }

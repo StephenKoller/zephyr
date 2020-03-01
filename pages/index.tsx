@@ -19,7 +19,6 @@ const IndexPage: NextPage<Props> = () => {
   const [forecast, setForecast] = useState({} as Forecast)
   const [suntimes, setSuntimes] = useState({} as SunriseSunsetTimes)
   const [loading, setLoading] = useState(false)
-  const [searchEnabled, setSearchEnabled] = useState(true)
   const [error, setError] = useState('')
 
   const resetData = () => {
@@ -94,7 +93,6 @@ const IndexPage: NextPage<Props> = () => {
   const handleEnterKey = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e?.key === 'Enter') fetchWeatherOrShowErrors()
   }
-  const handleClickSearch = async () => fetchWeatherOrShowErrors()
 
   // bit of a hack: {} aka empty object will have an Object.keys.length of 0
   const hasForecastData = Object.keys(forecast).length > 0
@@ -108,12 +106,7 @@ const IndexPage: NextPage<Props> = () => {
         setSearchTerm={setSearchTerm}
         handleEnterKey={handleEnterKey}
         setError={setError}
-        setSearchEnabled={setSearchEnabled}
       />
-      <br />
-      <button id="search-button" onClick={handleClickSearch} disabled={!searchEnabled}>
-        Search
-      </button>
       <br />
 
       {error && <div>{error}</div>}
