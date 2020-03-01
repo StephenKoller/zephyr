@@ -18,7 +18,7 @@ const formatForecast = (forecast: Forecast): Forecast => {
     ...forecast.hourly,
     data: forecast.hourly.data.map(hourlyDataPoint => ({
       ...hourlyDataPoint,
-      formattedTime: (new Date(hourlyDataPoint.time * 1000)).toLocaleString(),
+      formattedTime: (new Date(hourlyDataPoint.time * 1000)).toLocaleString('en-US', {"weekday": "short", "month": "short", "day": "numeric", "hour": "numeric"}),
       precipProbability: parseInt((hourlyDataPoint.precipProbability * 100).toFixed(0)),
       humidity: parseInt((hourlyDataPoint.humidity * 100).toFixed(0)),
       temperature: parseInt(hourlyDataPoint.temperature.toFixed(0)),
@@ -66,8 +66,8 @@ export const fetchSunriseSunsetTimes = async (latitude: number, longitude: numbe
 
   const formattedResults = {
     ...data.results,
-    sunrise: new Date(data.results.sunrise).toLocaleTimeString(),
-    sunset: new Date(data.results.sunset).toLocaleTimeString(),
+    sunrise: new Date(data.results.sunrise).toLocaleTimeString('en-US', {"hour": "numeric", "minute": "numeric"}),
+    sunset: new Date(data.results.sunset).toLocaleTimeString('en-US', {"hour": "numeric", "minute": "numeric"}),
   }
 
   const formattedData = {...data, results: formattedResults}
