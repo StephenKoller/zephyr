@@ -119,11 +119,15 @@ const IndexPage: NextPage<Props> = () => {
       {hasForecastData && <Table forecast={forecast} />}
 
       <style jsx>{`
+        h1,
+        h2 {
+          text-align: center;
+        }
+
         h1 {
           color: #2e5689;
           font-family: 'Caesar Dressing', Arial, sans-serif;
           font-size: 4rem;
-          font-weight: 500;
           letter-spacing: 0.5rem;
           margin: 2rem 0 1rem 0;
         }
