@@ -102,6 +102,7 @@ const IndexPage: NextPage<Props> = () => {
   return (
     <Layout>
       <h1>Zephyr</h1>
+      <h2>weather forecasts for drone pilots</h2>
       <Searchbar
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}

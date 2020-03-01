@@ -10,6 +10,10 @@ export default css`
     margin: 2rem 0 1rem 0;
   }
 
+  h2 {
+    font-weight: 100;
+  }
+
   #search-button {
     padding: 0.3em 1em;
     font-size: 1em;
