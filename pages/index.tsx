@@ -9,6 +9,7 @@ import { fetchWeather, fetchLocationData, fetchSunriseSunsetTimes } from '../uti
 import Table from '../components/Table'
 
 import indexStyles from './index.styles.js'
+import Searchbar from '../components/Searchbar'
 
 type Props = {
   suntimes: {
@@ -23,11 +24,11 @@ const IndexPage: NextPage<Props> = () => {
   const [forecast, setForecast] = useState({} as Forecast)
   const [suntimes, setSuntimes] = useState({} as SunriseSunsetTimes)
   const [loading, setLoading] = useState(false)
+  const [searchEnabled, setSearchEnabled] = useState(true)
   const [error, setError] = useState('')
 
-  // reset error state when user types in the search bar
+  // reset results if user clears text field
   useEffect(() => {
-    if (error) setError('')
     if (searchTerm === '') resetData()
   }, [searchTerm])
 
@@ -103,25 +104,18 @@ const IndexPage: NextPage<Props> = () => {
   return (
     <Layout>
       <h1>Zephyr</h1>
-      {/* extract to search bar component? */}
-      <div id="location-search">
-        <span className="icon">🌬</span>
-        <input
-          type="text"
-          placeholder="Search for a location..."
-          name="location-search"
-          value={searchTerm}
-          onChange={e => setSearchTerm(e.target.value)}
-          onKeyPress={handleEnterKey}
-        />
-        <span className="icon reversed">🌬</span>
-      </div>
+      <Searchbar
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        handleEnterKey={handleEnterKey}
+        setError={setError}
+        setSearchEnabled={setSearchEnabled}
+      />
       <br />
-      <button id="search-button" onClick={handleClickSearch}>
+      <button id="search-button" onClick={handleClickSearch} disabled={!searchEnabled}>
         Search
       </button>
       <br />
-      {/* </searchbar> */}
 
       {error && <div>{error}</div>}
       {loading && <div>Loading...</div>}
