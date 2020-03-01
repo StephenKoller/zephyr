@@ -17,12 +17,15 @@ const Layout: React.FunctionComponent<Props> = ({ children, title = '🌬 Zephyr
     </Head>
     <header></header>
     <main>{children}</main>
-
     <style jsx global>{`
       body {
         display: flex;
         justify-content: center;
         text-align: center;
+        background: #2980b9; /* fallback for old browsers */
+        background: -webkit-linear-gradient(to bottom, #ffffff, #6dd5fa, #2980b9) fixed; /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to bottom, #ffffff, #6dd5fa, #2980b9) fixed; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        height: 100vh;
       }
     `}</style>
   </div>
