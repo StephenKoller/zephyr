@@ -27,24 +27,24 @@ Typically, the best conditions are:
 
 ### Core
 
-- [ ] get forecast for a given location (today)
-  - [ ] sunrise / sunset time
-  - [ ] wind speed (average during daylight)
-  - [ ] temperature / humidity (average during daylight)
-  - [ ] precipitation (average during daylight)
-  - [ ] invent some kind of at-a-glance aggregate indicator
-- [ ] get multi-day forecast for a given location / date
-- [ ] show simple map of location
+- [x] get forecast for a given location (today)
+  - [x] sunrise / sunset time
+  - [x] wind speed
+  - [x] temperature / humidity
+  - [x] precipitation
+- [ ] invent some kind of at-a-glance aggregate indicator
+  - [ ] in other words, answer the question: can I fly here today?
+- [ ] use browser geolocation API to automatically get user's location on load
 
 ### Stretch
 
+- [ ] show simple map of location
+- [ ] get multi-day forecast for a given location / date
 - [ ] allow multiple locations
 - [ ] more in-depth data visualization
-
   - [ ] sunrise / sunset time
   - [ ] wind speed over time
   - [ ] temperature / humidity over time
-
 - [ ] user authentication
 - [ ] save multiple locations to user account
 
