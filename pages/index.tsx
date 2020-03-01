@@ -22,17 +22,17 @@ const IndexPage: NextPage<Props> = () => {
   const [searchEnabled, setSearchEnabled] = useState(true)
   const [error, setError] = useState('')
 
-  // reset results if user clears text field
-  useEffect(() => {
-    if (searchTerm === '') resetData()
-  }, [searchTerm])
-
   const resetData = () => {
     setSuntimes({} as SunriseSunsetTimes)
     setForecast({} as Forecast)
     setMapboxData({} as MapboxData)
     setLoading(false)
   }
+
+  // reset results if user clears text field
+  useEffect(() => {
+    if (searchTerm === '') resetData()
+  }, [searchTerm])
 
   // trigger fetch of sunrise, forecast data when geocoding is done
   useEffect(() => {
