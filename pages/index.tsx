@@ -110,7 +110,7 @@ const IndexPage: NextPage<Props> = () => {
       <br />
 
       {error && <div>{error}</div>}
-      {loading && <div>Loading...</div>}
+      {loading && <div className="loading loading-lg"></div>}
 
       <h2>{mapboxData?.features?.[0]?.place_name}</h2>
 
