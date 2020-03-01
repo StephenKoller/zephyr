@@ -20,61 +20,57 @@ const Searchbar: FC<Props> = ({ searchTerm, handleEnterKey, setSearchTerm, setEr
 
   return (
     <div id="location-search">
-      <span className="icon">🌬</span>
+      <img src="/wind-blowing-face.png" alt="wind blowing face" className="icon" />
       <label htmlFor="location-search" aria-hidden="false" style={{ display: 'none' }}>
         Location Search
       </label>
       <input
         type="text"
-        placeholder="Search for a location..."
         name="location-search"
         value={searchTerm}
         onChange={handleInputChange}
         onKeyPress={handleEnterKey}
         pattern="[a-zA-Z\s]+"
+        tabIndex={1}
+        autoFocus
       />
-      <span className="icon reversed">🌬</span>
       <style jsx>{`
         #location-search {
-          align-items: center;
-          border-radius: 5px;
-          border: 1px solid rgb(216, 216, 216);
-          display: inline-flex;
-          font-size: 0.875rem;
-          height: 2.25rem;
-          outline: currentcolor none 0px;
-          padding: 0;
-          transition: border 0.2s ease 0s;
-          width: 320px;
-          background-color: #fff;
+          margin: 0 auto;
+          max-width: 524px;
+          display: flex;
         }
 
         #location-search > input {
-          background-color: transparent;
-          font-size: 1rem;
-          display: flex;
-          height: 100%;
+          flex: 0 1 auto;
+          padding: 12px 14px 12px 62px;
+          font-size: 30px;
+          border: 1px solid rgba(255, 255, 255, 0.25);
+          background-color: #2e5689;
+          color: #d7d7d7;
+          box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+          line-height: 1.25;
+          margin: 0;
           width: 100%;
-          border: medium none;
-          outline: currentcolor none 0px;
-          padding: 0 0.5rem 0 0.5rem;
-          text-align: center;
+          border-radius: 2px;
         }
 
         #location-search > input:invalid {
           border: red solid 3px;
         }
 
-        .icon {
-          font-size: 3rem;
+        #location-search > input:focus {
+          color: #fff;
+          border-color: rgba(255, 255, 255, 0.45);
+          outline: none;
         }
 
-        .icon.reversed {
-          -moz-transform: scale(-1, 1);
-          -webkit-transform: scale(-1, 1);
-          -o-transform: scale(-1, 1);
-          -ms-transform: scale(-1, 1);
-          transform: scale(-1, 1);
+        #location-search > .icon {
+          flex: 0 1 auto;
+          width: 48px;
+          height: 48px;
+          margin: 6px -48px 0 0;
+          z-index: 1;
         }
       `}</style>
     </div>
