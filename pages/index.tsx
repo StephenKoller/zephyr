@@ -114,11 +114,62 @@ const IndexPage: NextPage<Props> = () => {
 
       <h2>{mapboxData?.features?.[0]?.place_name}</h2>
 
-      {forecast?.currently?.summary && <h3>Currently: {forecast?.currently?.summary}</h3>}
-      {forecast?.hourly?.summary && <h3>Today: {forecast?.hourly?.summary}</h3>}
-      {forecast?.daily?.summary && <h3>This week: {forecast?.daily?.summary}</h3>}
-      {suntimes?.results?.sunrise && <h3>Sunrise: {suntimes?.results?.sunrise}</h3>}
-      {suntimes?.results?.sunset && <h3>Sunset: {suntimes?.results?.sunset}</h3>}
+      <div className="container">
+        {suntimes?.results?.sunrise && (
+          <div className="columns">
+            <div className="column col-2">
+              <h5>Sunrise:</h5>
+            </div>
+            <div className="column col-10">
+              <h5>{suntimes?.results?.sunrise}</h5>
+            </div>
+          </div>
+        )}
+
+        {suntimes?.results?.sunset && (
+          <div className="columns">
+            <div className="column col-2">
+              <h5>Sunset:</h5>
+            </div>
+            <div className="column col-10">
+              <h5>{suntimes?.results?.sunset}</h5>
+            </div>
+          </div>
+        )}
+
+        {forecast?.currently?.summary && (
+          <div className="columns">
+            <div className="column col-2">
+              <h5>Currently:</h5>
+            </div>
+            <div className="column col-10">
+              <h5>{forecast?.currently?.summary}</h5>
+            </div>
+          </div>
+        )}
+
+        {forecast?.hourly?.summary && (
+          <div className="columns">
+            <div className="column col-2">
+              <h5>Today:</h5>
+            </div>
+            <div className="column col-10">
+              <h5>{forecast?.hourly?.summary}</h5>
+            </div>
+          </div>
+        )}
+
+        {forecast?.daily?.summary && (
+          <div className="columns">
+            <div className="column col-2">
+              <h5>This week:</h5>
+            </div>
+            <div className="column col-10">
+              <h5>{forecast?.daily?.summary}</h5>
+            </div>
+          </div>
+        )}
+      </div>
 
       {hasForecastData && <Table forecast={forecast} />}
 
