@@ -16,17 +16,6 @@ const Layout: React.FunctionComponent<Props> = ({ children, title = '🌬 Zephyr
     </Head>
     <header></header>
     <main>{children}</main>
-    <footer>
-      <hr />
-      <nav>
-        <Link href="/">
-          <a>Home</a>
-        </Link>
-        <Link href="/about">
-          <a>About</a>
-        </Link>
-      </nav>
-    </footer>
 
     <style jsx global>{`
       html {
