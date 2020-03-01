@@ -8,7 +8,6 @@ import Layout from '../components/Layout'
 import { fetchWeather, fetchLocationData, fetchSunriseSunsetTimes } from '../utils/api'
 import Table from '../components/Table'
 
-import indexStyles from './index.styles.js'
 import Searchbar from '../components/Searchbar'
 
 type Props = {}
