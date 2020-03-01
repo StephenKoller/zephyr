@@ -11,12 +11,7 @@ import Table from '../components/Table'
 import indexStyles from './index.styles.js'
 import Searchbar from '../components/Searchbar'
 
-type Props = {
-  suntimes: {
-    sunrise: string
-    sunset: string
-  }
-}
+type Props = {}
 
 const IndexPage: NextPage<Props> = () => {
   const [searchTerm, setSearchTerm] = useState('')
