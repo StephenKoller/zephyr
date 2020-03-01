@@ -9,6 +9,7 @@ import { fetchWeather, fetchLocationData, fetchSunriseSunsetTimes } from '../uti
 import Table from '../components/Table'
 
 import Searchbar from '../components/Searchbar'
+import ForecastSummary from '../components/ForecastSummary'
 
 type Props = {}
 
@@ -113,66 +114,10 @@ const IndexPage: NextPage<Props> = () => {
 
       <h2>{mapboxData?.features?.[0]?.place_name}</h2>
 
-      <div className="container">
-        {suntimes?.results?.sunrise && (
-          <div className="columns">
-            <div className="column col-2">
-              <h5>Sunrise:</h5>
-            </div>
-            <div className="column col-10">
-              <h5>{suntimes?.results?.sunrise}</h5>
-            </div>
-          </div>
-        )}
-
-        {suntimes?.results?.sunset && (
-          <div className="columns">
-            <div className="column col-2">
-              <h5>Sunset:</h5>
-            </div>
-            <div className="column col-10">
-              <h5>{suntimes?.results?.sunset}</h5>
-            </div>
-          </div>
-        )}
-
-        {forecast?.currently?.summary && (
-          <div className="columns">
-            <div className="column col-2">
-              <h5>Currently:</h5>
-            </div>
-            <div className="column col-10">
-              <h5>{forecast?.currently?.summary}</h5>
-            </div>
-          </div>
-        )}
-
-        {forecast?.hourly?.summary && (
-          <div className="columns">
-            <div className="column col-2">
-              <h5>Today:</h5>
-            </div>
-            <div className="column col-10">
-              <h5>{forecast?.hourly?.summary}</h5>
-            </div>
-          </div>
-        )}
-
-        {forecast?.daily?.summary && (
-          <div className="columns">
-            <div className="column col-2">
-              <h5>This week:</h5>
-            </div>
-            <div className="column col-10">
-              <h5>{forecast?.daily?.summary}</h5>
-            </div>
-          </div>
-        )}
-      </div>
+      <ForecastSummary forecast={forecast} suntimes={suntimes} />
 
       {hasForecastData && <Table forecast={forecast} />}
 
-      <style jsx>{indexStyles}</style>
       <style jsx>{`
         h1 {
           color: #2e5689;
