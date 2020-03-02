@@ -26,7 +26,7 @@ const getPrecipitationClassName = (precipitation: number) => {
 const canFly = (hour: HourlyDataPoint) => {
   const precipOk = hour.precipProbability < 60
   const windOk = hour.windSpeed < 15 && hour.windGust < 30
-  const temperatureOk = hour.temperature > 59 && hour.temperature < 90
+  const temperatureOk = hour.temperature > 14 && hour.temperature < 90
   return precipOk && windOk && temperatureOk
 }
 
@@ -63,9 +63,6 @@ const Table: FC<Props> = ({ forecast }) => (
         background-color: #fff;
       }
       table tr:nth-of-type(2n + 1) {
-         {
-          /* background-color: rgba(0, 0, 0, 0.1); */
-        }
         background-color: #efefef;
       }
 
