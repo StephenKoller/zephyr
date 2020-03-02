@@ -35,12 +35,12 @@ Typically, the best conditions are:
   - [x] wind speed
   - [x] temperature / humidity
   - [x] precipitation
-- [ ] invent some kind of at-a-glance aggregate indicator
-  - [ ] in other words, answer the question: can I fly here today?
-- [ ] use browser geolocation API to automatically get user's location on load
+- [x] invent some kind of at-a-glance aggregate indicator
+  - [x] in other words, answer the question: can I fly here today?
 
 ### Stretch
 
+- [ ] use browser geolocation API to automatically get user's location on load
 - [ ] show simple map of location
 - [ ] get multi-day forecast for a given location / date
 - [ ] allow multiple locations
