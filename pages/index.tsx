@@ -99,8 +99,8 @@ const IndexPage: NextPage<Props> = () => {
 
   return (
     <Layout>
-      <h1>Zephyr</h1>
-      <h2>weather forecasts for drone pilots</h2>
+      <h1 className={hasForecastData ? 'headline-sm' : 'headline'}>Zephyr</h1>
+      {!hasForecastData && <h2>weather forecasts for drone pilots</h2>}
       <Searchbar
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
@@ -134,6 +134,15 @@ const IndexPage: NextPage<Props> = () => {
 
         h2 {
           font-weight: 100;
+        }
+
+        .headline {
+          margin-top: 25vh;
+        }
+
+        .headline-sm {
+          font-size: 3rem;
+          letter-spacing: 0.2rem;
         }
 
         #search-button {
