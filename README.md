@@ -38,7 +38,7 @@ Typically, the best conditions are:
 - [x] invent some kind of at-a-glance aggregate indicator
   - [x] in other words, answer the question: can I fly here today?
 
-### Stretch
+### Possible Future Enhancements
 
 - [ ] use browser geolocation API to automatically get user's location on load
 - [ ] show simple map of location
