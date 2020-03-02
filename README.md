@@ -64,6 +64,13 @@ Typically, the best conditions are:
 | [Mapbox API](https://docs.mapbox.com/api/)                                                         | mapping / geocoding data                       |
 | [Now](https://zeit.co/now)                                                                         | deployment                                     |
 
+## Running project locally
+
+1. check out repository
+2. run `npm install` from the root directory
+3. run `npm run dev`
+4. check it out on http://localhost:3000/ 🎉
+
 <!-- When looking for a code sample, we would like to see a webapp that:
 1. Has strong modern web development fundamentals like:
     1. Component-driven development,
